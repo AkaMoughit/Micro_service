@@ -5,6 +5,7 @@ services:
       MYSQL_ROOT_PASSWORD: Moughit1947
     ports:
       - "3306:3306"
+
   eureka-service:
     container_name: eureka-service
     build: ./sv_eurika
@@ -12,11 +13,12 @@ services:
       - "8761:8761"
     expose:
       - "8761"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
       interval: 10s
       retries: 3
-
 
   client-service:
     container_name: client-service
@@ -25,7 +27,6 @@ services:
       - "8081:8081"
     expose:
       - "8081"
-
     depends_on:
       eureka-service:
         condition: service_healthy
@@ -35,7 +36,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/clientservicedb?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: Moughit1947
-      DISCOVERY_SERVICE_URL: http://eureka-service:8761/eureka/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka/
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
       interval: 10s
@@ -59,7 +60,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/carservicedb?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: Moughit1947
-      DISCOVERY_SERVICE_URL: http://eureka-service:8761/eureka/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka/
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
       interval: 10s
@@ -76,8 +77,7 @@ services:
       eureka-service:
         condition: service_healthy
     environment:
-      DISCOVERY_SERVICE_URL: http://eureka-service:8761/eureka/
-
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka/
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

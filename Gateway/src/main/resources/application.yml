@@ -11,14 +11,13 @@ spring:
     gateway:
       routes:
         - id: service-client-route
-          uri: http://localhost:8083/
+          uri: lb://SERVICE-CLIENT
           predicates:
             - Path=/api/clients/**
         - id: service-car-route
-          uri: http://localhost:8082/
+          uri: lb://SERVICE-CAR
           predicates:
             - Path=/api/car/**
-
 
     discovery:
       locator:
