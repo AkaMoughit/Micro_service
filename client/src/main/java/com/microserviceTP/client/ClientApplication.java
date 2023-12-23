@@ -18,10 +18,14 @@ public class ClientApplication {
 	@Bean
 	CommandLineRunner initializeMysqlDatabase(ClientRepository clientRepository){
 		return args -> {
-			clientRepository.save(new Client(Long.parseLong("1"),"amine1",Float.parseFloat("26")));
-			clientRepository.save(new Client(Long.parseLong("2"),"khalid",Float.parseFloat("26")));
-			clientRepository.save(new Client(Long.parseLong("3"),"mouad",Float.parseFloat("23")));
-			clientRepository.save(new Client(Long.parseLong("4"),"nouh",Float.parseFloat("21")));
+			clientRepository.save(new Client(Long.parseLong("1"),"Abdelmoughit Moubarik",Float.parseFloat("23")));
+			clientRepository.save(new Client(Long.parseLong("2"),"Moubarik Abdelmoughit",Float.parseFloat("23")));
+			clientRepository.save(new Client(Long.parseLong("3"),"Moughit",Float.parseFloat("23")));
+			clientRepository.save(new Client(Long.parseLong("4"),"Max verstapen",Float.parseFloat("21")));
+			clientRepository.save(new Client(Long.parseLong("5"),"Abdelmoughit Moubarik",Float.parseFloat("23")));
+			clientRepository.save(new Client(Long.parseLong("6"),"Moubarik Abdelmoughit",Float.parseFloat("23")));
+			clientRepository.save(new Client(Long.parseLong("7"),"Moughit",Float.parseFloat("23")));
+			clientRepository.save(new Client(Long.parseLong("8"),"Max verstapen",Float.parseFloat("21")));
 		};
 	}
 }
