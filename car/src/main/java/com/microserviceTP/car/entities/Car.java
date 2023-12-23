@@ -1,12 +1,10 @@
 package com.microserviceTP.car.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -20,8 +18,9 @@ public class Car {
         private String brand;
         private String model;
         private String matricule;
-        private Long client_id;
 
-
+        @ManyToOne
+        @JoinColumn(name = "client_id")
+        private Client client;
     }
 
